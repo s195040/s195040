@@ -29,12 +29,19 @@ qa[8] = ["女子100m記録は誰？","フレーザープライス","土井杏奈
 qa[9] = ["室伏広治は日本選手権何連覇しましたか？","7連覇","11連覇","18連覇",2];
 
 //初期設定
-count = 0; //問題番号
 q_sel = 3; //選択肢の数
-
-//最初の問題
-quiz();
-
+	
+setReady();
+	
+//初期設定
+function setReady() {
+	count = 0; //問題番号
+	ansers = new Array(); //解答記録
+	
+	//最初の問題
+	quiz();
+}
+	
 //問題表示
 function quiz() {
 	var s, n;
@@ -55,12 +62,11 @@ function anser(num) {
 	//答え合わせ
 	if (num == qa[count][q_sel + 1]) {
 		//正解
-		s += "○" + qa[count][num];
 		ansers[count] = "○";
-	} else {
-		s += "×" + qa[count][num];
+	} else  {
 		ansers[count] = "×";
 	}
+	s += ansers[count] + qa[count][num];		      
 	document.getElementById("text_a").innerHTML = s;
 	
 	//次の問題を表示
@@ -84,25 +90,12 @@ function anser(num) {
 		s += "</tr>";
 		s += "</table>";
 		document.getElementById("text_q").innerHTML =s;
-    //次の選択肢
+                //次の選択肢
 		s = "【<a href='javascript:history.back()'>前のページに戻る</a>】";
 		s += "【<a href='javascript:setReady()'>同じ問題を最初から</a>】";
 		s += "【<a href=''>次の問題に進む</a>】";
 		document.getElementById("text_s").innerHTML = s;
 	}
-}
-//初期設定
-q_sel = 3; //選択肢の数
-
-setReady();
-
-//初期設定
-function setReady() {
-	count = 0; //問題番号
-	ansers = new Array(); //解答記録
-	
-	//最初の問題
-	quiz();
 }
 
 
